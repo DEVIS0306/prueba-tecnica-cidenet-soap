@@ -1,0 +1,26 @@
+1) instalar ORACLE DVeloper 12 (antes de instalar el oracle verificar que tenga el jdk 1.8,
+ ya que con otros JDK de java puede presentar inconveniente).
+2) instalar visual studio o eciplse.
+3) descargar un gestor de base de datos para Oracle (yo use DataGrid pero puede ser cual quiera)
+4) dentro del proyecto hay una carpeta llamada "BD" que contiene dos archivo sql
+ejecutar primero el archivo con nombre "createUserCursoSoa.sql" este crea el usuario y contraseña de 
+la base de datos, despues ejecutar el archivo sql con nombre "insertsCursoSoa.sql", este creas las tablas necesaria
+y hace dos insept a las respectiva tablas.
+5) abrir y cargar el proyecto nombre "EmployeeWSUpdate" en visual studio, en la terminar ejecutar el siguiente comando "mvn clean install -U",
+esto para descargar las dependencia, si surge un error debe ser por el ojdbc14, deje una carpeta comprimida
+con el nombre "ojdbc14-10.2.0.4.0.zip" la cual contiene el .jar, que deben colocar en la siguiente ruta
+C:\Users\User\.m2\repository\com\oracle\ojdbc14\10.2.0.4.0 (puede variar segun donde tengan la carpeta .m2)
+6) luego ejecutar "mvn clean compile" para asegurar que no tenemos ningun error
+7) ejecutar el comando " mvn clean package" esto le genera una ruta donde se encuentra un 
+archivo .war con nombre "EmployeeWS.war" lo usaremos mas adelante para desplegar en el servidor weblogin
+8) abrir JDveloper 12, para proceder a crear DataSource en el servidor de WebLogin
+9) inicializar el server y luego abrir la consola selecionando la opcon Launch Administrative Console (o ir: http://localhost:7001/console/login/LoginForm.jsp)
+10) loguiarse al serve y creamos el dataSource, al momento de crear el nombre de origen de datos  JDBC es "DS_DBXE",
+y el nombre del JNDI es "jdbc/soadev", nombre de la bd es "xe", nombre del host es "localhost" y el puerto en mi caso es "1521", nombre de usuario de la bd es "devsoa" y la contraseña "12345"
+11) luego buscamo nuestro archivo EmployeeWS.war generado en el punto 7, el el administrador de consola 
+vamos a desplegue y le damos instalar para subir nuestro arhivo EmployeeWS.war
+12) abrimos otra ventana de visual studio para el cliente, el nombre del archivo es "EmployeeWS-Include-Client",
+y ejecutamos la clase con nombre "EmployeeSOAP11BindQSPortClient.java"
+
+
+
